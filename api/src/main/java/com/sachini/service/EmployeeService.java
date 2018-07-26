@@ -1,9 +1,11 @@
 package com.sachini.service;
 
 import com.sachini.model.Employee;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component("EmployeeServuce")
 public interface EmployeeService {
 
     public void addEmployee(Employee employee);

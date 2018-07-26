@@ -52,6 +52,10 @@
         <!--<property name="employeeDAO" ref="employeeDAO" />-->
     </bean>
 
+    <bean id="employeeController" class="com.sachini.controller.EmployeeController">
+        <property name="employeeService" ref="employeeServiceImpl" />
+    </bean>
+
     <tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>

@@ -3,6 +3,7 @@ package com.sachini.service;
 import com.sachini.dao.EmployeeDAO;
 import com.sachini.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,8 +11,8 @@ import java.util.List;
 
 @Service
 @Transactional
+@Configurable
 public class EmployeeServiceImpl implements EmployeeService {
-
     @Autowired
     private EmployeeDAO employeeDAO;
 
@@ -24,6 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public List<Employee> getAllEmployees() {
+        System.out.println("serviceImpl-------------------------------------------");
         return employeeDAO.getAllEmployees();
     }
 

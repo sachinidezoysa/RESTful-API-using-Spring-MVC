@@ -21,23 +21,22 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @SuppressWarnings("unchecked")
     public List<Employee> getAllEmployees() {
 
-        return sessionFactory.getCurrentSession().createQuery("from Employee")
-                .list();
+        System.out.println("DAO---------------------------------------------");
+        return sessionFactory.getCurrentSession().createQuery("from Employee").list();
     }
 
     @Override
     public void deleteEmployee(Integer employeeId) {
-        Employee employee = (Employee) sessionFactory.getCurrentSession().load(
-                Employee.class, employeeId);
-        if (null != employee) {
-            this.sessionFactory.getCurrentSession().delete(employee);
-        }
+        Employee employee = (Employee) sessionFactory.getCurrentSession().load(Employee.class, employeeId);
+
+            if (null != employee) {
+                this.sessionFactory.getCurrentSession().delete(employee);
+            }
 
     }
 
     public Employee getEmployee(int empid) {
-        return (Employee) sessionFactory.getCurrentSession().get(
-                Employee.class, empid);
+        return (Employee) sessionFactory.getCurrentSession().get(Employee.class, empid);
     }
 
     @Override

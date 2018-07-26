@@ -2,6 +2,8 @@ package com.sachini.service;
 
 
 import com.sachini.model.Employee;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +19,18 @@ public class EmployeeServiceImplTest {
     @Autowired
     private EmployeeService employeeService;
 
-/*    @Test
+    @Before
     public void addEmployee() {
         Employee employee = new Employee();
 
-//        employee.setId(1);
-        employee.setAddress("dkjfasskhfiusdyfis");
-        employee.setEmail("sdf@.v");
-        employee.setName("bawanthi");
-        employee.setTelephone("0123547896");
+        employee.setId(9);
+        employee.setAddress("hedffgy");
+        employee.setEmail("sdsdss@.v");
+        employee.setName("dfdfgfdgf");
+        employee.setTelephone("01235sadas47896");
 
         employeeService.addEmployee(employee);
-    }*/
+    }
 
     @Test
     public void getAllEmployees() {
@@ -37,20 +39,15 @@ public class EmployeeServiceImplTest {
             System.out.println(list.getId());
         }
     }
-/*
-    @Test
-    public void deleteEmployee() {
-        employeeService.deleteEmployee(3);
-    }
 
     @Test
     public void getEmployee() {
         Employee employee = new Employee();
-        employeeService.getEmployee(11);
+        employeeService.getEmployee(2);
 
         List<Employee> employeeList = employeeService.getAllEmployees();
         for (Employee list:employeeList){
-            if ( employee.getId() == 11){
+            if ( employee.getId() == 1){
                 System.out.println("getEmployee");
             }
         }
@@ -60,13 +57,18 @@ public class EmployeeServiceImplTest {
     @Test
     public void updateEmployee() {
         Employee employee = new Employee();
-        employeeService.getEmployee(11);
+        employeeService.getEmployee(1);
 
         List<Employee> employeeList = employeeService.getAllEmployees();
         for (Employee list:employeeList){
-            if ( employee.getId() == 11){
+            if ( employee.getId() == 1){
                 System.out.println("getEmployee");
             }
         }
-    }*/
+    }
+
+    @After
+    public void deleteEmployee() {
+        employeeService.deleteEmployee(9);
+    }
 }
