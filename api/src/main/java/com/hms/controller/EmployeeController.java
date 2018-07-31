@@ -1,25 +1,114 @@
-package com.sachini.controller;
+/*
+ *   (C) Copyright 2017-2018 hSenid Software International (Pvt) Limited.
+ *   All Rights Reserved.
+ *
+ *   These materials are unpublished, proprietary, confidential source code of
+ *   hSenid Software International (Pvt) Limited and constitute a TRADE SECRET
+ *   of hSenid Software International (Pvt) Limited.
+ *
+ *   hSenid Software International (Pvt) Limited retains all title to and intellectual
+ *   property rights in these materials.
+ *
+ */
+package com.hms.controller;
 
-import com.sachini.model.Employee;
-import com.sachini.service.EmployeeService;
+import hms.model.Employee;
+import com.hms.service.EmployeeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import java.io.IOException;
 import java.util.List;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
+/**
+ * this is my controller class
+ * @author sachini de zoysa
+ */
 
 @Controller
 @Path("/")
 @Component
 public class EmployeeController {
 
+    @Autowired
     private EmployeeService employeeService;
+
+    /**
+     * In method listEmployee I'm taking a saved employee from his employeeID
+     * (here employeeID is hard-codede)
+     * @return
+     * @throws IOException
+     */
+    @GET
+    @Path("employee")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Employee listEmployee() throws IOException {
+        return employeeService.getEmployee(2);
+    }
+
+    /**
+     * in method listEmployee I'm taking all the saved employees from the database
+     * @return array
+     */
+    @GET
+    @Path("test")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Employee> listEmployees(){
+        return employeeService.getAllEmployees();
+    }
+
+    /**
+     * here i'm takein a saved em[ployee from his employeeID
+     * @param id
+     * @return
+     */
+    @GET
+    @Path("employee/{Id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Employee getEmployee(@PathParam("Id") int id){
+        return employeeService.getEmployee(id);
+    }
+
+    /**
+     * in method create I'm createing a new employee
+     * @param employee
+     * @return
+     */
+    @POST
+    @Path("create")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Employee create(@RequestBody Employee employee){
+        return employeeService.addEmployee(employee);
+    }
+
+
+    /**
+     * In method deleteEmployee I'm deleting a saved Employee from
+     * his employee ID.
+     * @param id
+     * @return
+     */
+    @DELETE
+    @Path("delete/{Id}")
+    @Produces(MediaType.TEXT_HTML)
+    public String deleteEmployee(@PathParam("Id") int id){
+        if(employeeService.getEmployee(id)==null){
+            return "No user with "+id;
+        }else{
+            Employee employee = employeeService.getEmployee(id);
+            employeeService.deleteEmployee(id);
+            return "Employee with ID "+employee.getId()+" deleted Successfully";
+        }
+    }
+
+    /*private EmployeeService employeeService;
 
     @GET
     @Path("test")
@@ -92,7 +181,7 @@ public class EmployeeController {
     public void setEmployeeService(EmployeeService employeeService) {
 
         this.employeeService = employeeService;
-    }
+    }*/
 
     /*private static final Logger logger = Logger
             .getLogger(EmployeeController.class);
